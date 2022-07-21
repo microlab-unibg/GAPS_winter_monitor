@@ -3,7 +3,7 @@
   <FileVersion>3.0</FileVersion>
   <Workspace>
     <WorkspaceType>Single-project</WorkspaceType>
-    <WorkspacePath>C:\Users\elisa\Documents\ulab\Didattica\Lezioni\Interne\Technological Lab\winter-v2-demo-master\app\</WorkspacePath>
+    <WorkspacePath>C:\Users\elisa\Documents\ulab\Didattica\Lezioni\Interne\Technological Lab\Winter_v2\</WorkspacePath>
     <underRoot>true</underRoot>
     <TrustZone>0</TrustZone>
     <HAL_Driver>C:\Users\elisa\STM32Cube\Repository\STM32Cube_FW_L4_V1.15.1</HAL_Driver>
@@ -26,33 +26,6 @@
         </file>
         <file>
           <name>main.h</name>
-        </file>
-        <file>
-          <name>ffconf.h</name>
-        </file>
-        <file>
-          <name>bsp_driver_sd.h</name>
-        </file>
-        <file>
-          <name>sd_diskio.h</name>
-        </file>
-        <file>
-          <name>fatfs.h</name>
-        </file>
-        <file>
-          <name>fatfs_platform.h</name>
-        </file>
-        <file>
-          <name>usb_device.h</name>
-        </file>
-        <file>
-          <name>usbd_conf.h</name>
-        </file>
-        <file>
-          <name>usbd_desc.h</name>
-        </file>
-        <file>
-          <name>usbd_storage_if.h</name>
         </file>
       </filestoremove>
       <sourceEntriesToRemove>

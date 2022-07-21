@@ -25,6 +25,7 @@ PeripheralsInitStatus_t initStatus = { .LSM6DSL = 0, .HTS221 = 0, .LPS22HH = 0,
 LatestData_t latestData;
 
 uint32_t myTick;
+uint32_t myEpoch;
 
 /* Extern variables ----------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_memtomem_dma2_channel1;
@@ -55,6 +56,15 @@ void set_LogFrequency(uint16_t frequency);
  */
 uint16_t App_GetPeriod(void) {
 	return winter.period;
+}
+
+uint8_t App_MyDebug(uint8_t led) {
+	RTC_GetDateTime_Epoch(&myEpoch);
+if ((myEpoch % 100) == 0) {
+		IO_SetLED(led);
+		HAL_Delay(100);
+		IO_ResetLED(led);
+	}
 }
 
 /*
@@ -110,13 +120,13 @@ uint8_t App_SetSystemState(SystemState_e s) {
 				break;
 			case SYSTEM_STATE_IDLE:
 			case SYSTEM_STATE_IDLE_CONNECTED:
+				IO_SetLED(LED_GREEN);
 				if (winter.state == SYSTEM_STATE_IDLE
 						|| winter.state == SYSTEM_STATE_IDLE_CONNECTED) {
 					/*
 					 * If the transition is IDLE <-> IDLE_CONNECTED (either in
 					 * one direction or the opposite), there's nothing to do
 					 */
-					__NOP();
 				} else {
 					// Disable the double-tap detection
 					LSM6DSL_Enable_DoubleTapInterrupt(0);
@@ -140,7 +150,8 @@ uint8_t App_SetSystemState(SystemState_e s) {
 				LSM6DSL_Set_Axl_ODR(LSM6DSL_ODR_104Hz);
 
 				// Enable the double-tap detection
-				LSM6DSL_Enable_DoubleTapInterrupt(1);
+				//LSM6DSL_Enable_DoubleTapInterrupt(1);
+
 				break;
 			case SYSTEM_STATE_LOG:
 				// Check the SD presence
@@ -175,7 +186,7 @@ uint8_t App_SetSystemState(SystemState_e s) {
 
 		// Update the last activity time and reset the tick counter
 		App_UpdateLastActivityTime();
-		myTick = 0;
+		// myTick = 0;
 	}
 
 	return s == App_GetSystemState();
@@ -573,11 +584,13 @@ void do_IdleJob(void) {
 
 	} else {
 		// Blink the LED after a certain amount of function calls
-		if ((myTick % LED_BLINK_PERIOD_IDLE) == 0) {
+		/*if ((myTick % LED_BLINK_PERIOD_IDLE) == 0) {
 			IO_SetLED(LED_BLUE);
 			HAL_Delay(10);
 			IO_ResetLED(LED_BLUE);
-		}
+		}*/
+		//App_MyDebug(LED_GREEN);
+		__NOP();
 	}
 }
 

@@ -91,6 +91,7 @@ void App_Handle_DoubleTap(void);
 void App_Handle_BTConnected(void);
 void App_Handle_BTDisconnected(void);
 uint8_t App_DeinitPeripherals(void);
+uint8_t App_MyDebug(uint8_t);
 
 /* Exported variables --------------------------------------------------------*/
 
@@ -130,6 +131,7 @@ uint8_t App_DeinitPeripherals(void);
 /* TODO: adjust this value according to the SYS_CLOCK frequency. */
 #define MAXIMUM_LOG_FREQUENCY		100
 #define TIMEOUT_IDLE_TO_SLEEP		60000
+#define WAKEUP_COUNTER				900		// Represents seconds
 #define RESTART_SHUTDOWN_DELAY		2000
 #define LED_BLINK_PERIOD_IDLE		10000
 #define LED_BLINK_PERIOD_LOG		5000

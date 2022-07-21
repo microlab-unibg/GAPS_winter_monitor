@@ -941,6 +941,16 @@ void Enter_Stop2_Mode(void) {
 	// Finally, suspend the SysTick to prevent its interrupts
 	HAL_SuspendTick();
 
+	// Define Wake-up with RTC
+
+	// With clock DIV16 -> frequency wake up clock is 32768/16 = 2048 Hz
+	// Note: DO NOT EXCEED FFFF value!!!
+	// HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 0xFFFF, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
+
+	// With ck_spre -> frequency wake up clock is 1 Hz
+	// Note: DO NOT EXCEED FFFF value!!!
+	HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, WAKEUP_COUNTER, RTC_WAKEUPCLOCK_CK_SPRE_16BITS);
+
 	// Enter Stop 2 Mode
 	HAL_PWREx_EnterSTOP2Mode(PWR_STOPENTRY_WFI);
 }
